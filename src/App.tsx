@@ -89,7 +89,7 @@ function CodeEditor(props: {
 
   return (
     <BlocklyWorkspace
-      className="w-full" // you can use whatever classes are appropriate for your app's CSS
+      className="w-full h-full" // you can use whatever classes are appropriate for your app's CSS
       toolboxConfiguration={INITIAL_TOOLBOX_JSON} // this must be a JSON toolbox definition
       initialXml={xml}
       onXmlChange={setXml}
@@ -97,6 +97,11 @@ function CodeEditor(props: {
   )
 }
 
+function Header() {
+  return <div className='w-full text-xl p-2'>
+    JacLy
+  </div>
+}
 
 function App() {
   const [device, setDevice] = useState< JacDevice | null>(null);
@@ -108,13 +113,14 @@ function App() {
   }
 
   return (
-    <div className="">
+    <div className="flex flex-col h-full">
+      <Header/>
       <ConnectionBar
         device={device}
         onConnection={handleNewDevice}
         onDisconnection={() => handleNewDevice(null)}/>
-      <div className='w-full flex'>
-      <div className='w-2/3'>
+      <div className='w-full flex flex-1'>
+        <div className='w-2/3'>
           <CodeEditor device={device}/>
         </div>
         <div className='w-1/3'>
