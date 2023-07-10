@@ -42,7 +42,7 @@ function ConnectionBar(props: {
     </>
   }
 
-  return <div className="w-full bg-gray-500 rounded p-2">
+  return <div className="w-full bg-gray-200 rounded p-2 mb-2">
     {
       props.device
         ? whenConnected()
@@ -71,7 +71,7 @@ function Monitor(props: {
   return <>
     <div className='w-full'>
       <Button text="Clear"
-              classNames='bg-blue-500 m-1 '
+              classNames='bg-blue-300 m-1 w-full '
               onClick={() => setText("")}/>
     </div>
     <div className='w-full bg-gray-50 m-2 p-2 font-mono'>
