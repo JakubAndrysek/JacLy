@@ -68,18 +68,18 @@ function Monitor(props: {
     });
   }, [props.device, setText, text]);
 
-  return <>
-    <div className='w-full'>
+  return <div className="h-full flex flex-col m-0 p-0">
+    <div className='w-full m-0'>
       <Button text="Clear"
               classNames='bg-blue-300 m-1 w-full '
               onClick={() => setText("")}/>
     </div>
-    <div className='w-full bg-gray-50 m-2 p-2 font-mono'>
-      <pre>
+    <div className='flex-1 w-full h-full overflow-y-scroll bg-gray-50 m-2 p-2 font-mono'>
+      <pre className='inline-block'>
         {text}
       </pre>
     </div>
-  </>;
+  </div>;
 }
 
 function CodeEditor(props: {
