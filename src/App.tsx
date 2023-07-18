@@ -1,7 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
 import './index.css';
 
+import "./customBlocks/customBlocks"
 import { BlocklyWorkspace } from 'react-blockly';
+import Blockly from "blockly";
+import {javascriptGenerator} from 'blockly/javascript';
+import { Buffer } from "buffer";
+
 
 import {Button} from "./components";
 
@@ -51,6 +56,71 @@ function ConnectionBar(props: {
   </div>;
 }
 
+function UploaderBar(props: {
+    device: JacDevice | null,
+}) {
+
+  let path : string = "code/demo.js";
+  let str : string = "console.log(\"Hello World!\");";
+
+  async function upload() {
+    if (!props.device)
+      return;
+    let device = props.device
+
+    await device.controller.lock().catch((err) => {
+      console.log("Error locking device: " + err);
+      throw 1;
+    });
+
+    let buff = Buffer.from(str, "utf-8")
+    const cmd = await device.uploader.writeFile(path, buff).catch((err) => {
+      console.log("Error: " + err + "\n");
+      throw 1;
+    });
+
+    // const cmd = await device.uploader.createDirectory(path).catch((err) => {
+    //   console.log("Error: " + err + "\n");
+    //   throw 1;
+    // });
+
+    await device.controller.unlock().catch((err) => {
+      console.log("Error unlocking device: " + err);
+      throw 1;
+    });
+
+    console.log(cmd.toString() + "\n");
+    // const filePath = '/path/to/file.js';  // Specify the path where you want to upload the file on the device
+    // const buffer = new TextEncoder().encode(code);
+    // device.uploader.writeFile(filePath, buffer)
+    //     .then(() => device.controller.runFile(filePath))  // Assuming the Controller class has a method runFile
+    //     .catch(console.error);
+  }
+
+  function whenConnected() {
+
+    return(
+        <Button text="Upload"
+                onClick={upload}/>
+    )
+  }
+
+  function whenDisconnected() {
+    return (
+        <p>Not connected</p>
+    )
+  }
+
+
+  return <div className="w-full bg-gray-200 rounded p-2 mb-2">
+  {
+  props.device
+      ? whenConnected()
+      : whenDisconnected()
+  }
+  </div>;
+}
+
 function Monitor(props: {
   device: JacDevice | null
 }) {
@@ -84,16 +154,30 @@ function Monitor(props: {
 
 function CodeEditor(props: {
   device: JacDevice | null
+  onCodeChange: (code: string) => void
 }) {
-  const [xml, setXml] = useState<string>();
+  const workspaceRef = useRef<Blockly.WorkspaceSvg>();
+  const handleWorkspaceChange = (newWorkspace: Blockly.WorkspaceSvg) => {
+    console.log("Workspace changed")
+    // try {
+    //   workspaceRef.current = newWorkspace;
+    const jsCode = javascriptGenerator.workspaceToCode(newWorkspace);
+    console.log(jsCode);
+    //   const code = Blockly.JavaScript.workspaceToCode(newWorkspace);
+    //   console.log(code);
+      // props.onCodeChange(code);
+    // } catch (e) {
+    //     console.error(e);
+    // }
+
+  };
 
   return (
-    <BlocklyWorkspace
-      className="w-full h-full" // you can use whatever classes are appropriate for your app's CSS
-      toolboxConfiguration={INITIAL_TOOLBOX_JSON} // this must be a JSON toolbox definition
-      initialXml={xml}
-      onXmlChange={setXml}
-    />
+      <BlocklyWorkspace
+          className="w-full h-full"
+          toolboxConfiguration={INITIAL_TOOLBOX_JSON}
+          onWorkspaceChange={handleWorkspaceChange}
+      />
   )
 }
 
@@ -105,12 +189,23 @@ function Header() {
 
 function App() {
   const [device, setDevice] = useState< JacDevice | null>(null);
+  const [code, setCode] = useState<string>("");
 
   const handleNewDevice = (dev: JacDevice | null) => {
     if (device)
       device.destroy();
     setDevice(dev);
   }
+
+  // useEffect(() => {
+  //   if (device && code) {
+  //     const filePath = '/path/to/file.js';  // Specify the path where you want to upload the file on the device
+  //     const buffer = new TextEncoder().encode(code);
+  //     device.uploader.writeFile(filePath, buffer)
+  //         .then(() => device.controller.runFile(filePath))  // Assuming the Controller class has a method runFile
+  //         .catch(console.error);
+  //   }
+  // }, [device, code]);
 
   return (
     <div className="flex flex-col h-full">
@@ -119,9 +214,11 @@ function App() {
         device={device}
         onConnection={handleNewDevice}
         onDisconnection={() => handleNewDevice(null)}/>
+      <UploaderBar
+        device={device}/>
       <div className='w-full flex flex-1'>
         <div className='w-2/3'>
-          <CodeEditor device={device}/>
+          <CodeEditor device={device} onCodeChange={setCode}/>
         </div>
         <div className='w-1/3'>
           <Monitor device={device}/>
