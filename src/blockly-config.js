@@ -98,6 +98,17 @@ export const INITIAL_TOOLBOX_JSON = {
               '      <field name="FLOW">BREAK</field>\n' +
               "    </block>\n",
           },
+          {
+            kind: "block",
+            blockxml:
+                '    <block type="set_interval">\n' +
+                '      <value name="INTERVAL">\n' +
+                '        <shadow type="math_number">\n' +
+                '          <field name="NUM">1000</field>\n' +
+                "        </shadow>\n" +
+                "      </value>\n" +
+                "    </block>\n",
+          }
         ],
       },
       {
@@ -373,16 +384,28 @@ export const INITIAL_TOOLBOX_JSON = {
               "      </value>\n" +
               "    </block>\n",
           },
+          // {
+          //   kind: "block",
+          //   blockxml:
+          //     '    <block type="text_print">\n' +
+          //     '      <value name="TEXT">\n' +
+          //     '        <shadow type="text">\n' +
+          //     '          <field name="TEXT">abc</field>\n' +
+          //     "        </shadow>\n" +
+          //     "      </value>\n" +
+          //     "    </block>\n",
+          // },
           {
             kind: "block",
             blockxml:
-              '    <block type="text_print">\n' +
-              '      <value name="TEXT">\n' +
-              '        <shadow type="text">\n' +
-              '          <field name="TEXT">abc</field>\n' +
-              "        </shadow>\n" +
-              "      </value>\n" +
-              "    </block>\n",
+                '    <block type="console">\n' +
+                '      <field name="TYPE">log</field>\n' +
+                '      <value name="TEXT">\n' +
+                '        <shadow type="text">\n' +
+                '          <field name="TEXT">abc</field>\n' +
+                "        </shadow>\n" +
+                "      </value>\n" +
+                "    </block>\n",
           },
           {
             kind: "block",
