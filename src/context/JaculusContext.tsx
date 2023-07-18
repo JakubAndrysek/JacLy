@@ -1,8 +1,11 @@
 import {createContext, FC, InputHTMLAttributes, useContext, useEffect, useState} from "react";
 import {JacDevice} from "jaculus-tools/dist/src/device/jacDevice.js";
+
 export const DeviceContext = createContext({
     device: null as JacDevice | null,
-    setDevice: (device: JacDevice | null) => {
+    setNewDevice: (device: JacDevice | null) => {
+    },
+    disconnectDevice: () => {
     },
     connected: false,
     setConnected: (connected: boolean) => {
@@ -20,12 +23,24 @@ export const DeviceProvider: FC<DeviceProps> = ({children}) => {
         console.log("DeviceProvider: ", device)
     }, [device]);
 
+    const setNewDevice = (device: JacDevice | null) => {
+        if (device) {
+            device.destroy();
+        }
+        setDevice(device);
+    }
+
+    const disconnectDevice = () => {
+        setNewDevice(null);
+    }
+
     return (
         <DeviceContext.Provider
             value={{
                 // @ts-ignore
                 device: device,
-                setDevice: setDevice,
+                setNewDevice: setNewDevice,
+                disconnectDevice: disconnectDevice,
                 connected: connected,
                 setConnected: setConnected,
             }}
