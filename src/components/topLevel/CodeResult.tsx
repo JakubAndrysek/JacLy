@@ -15,7 +15,7 @@ const CodeResult: FC<CodeResultProps> = ({}) => {
 
 
     return (
-        <div className="flex-1 w-full h-full overflow-auto   font-mono rounded">
+        <div className="flex-1 w-full h-full overflow-auto m-1 p-1 font-mono rounded">
             <SyntaxHighlighter language="javascript" style={oneDark} showLineNumbers >
                 {code}
             </SyntaxHighlighter>

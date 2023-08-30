@@ -6,7 +6,7 @@ export interface HeaderProps extends InputHTMLAttributes<HTMLInputElement> {
 const Header: FC<HeaderProps> = ({}) => {
 
     return (
-        <div className='w-full text-xl p-2'>
+        <div className='white_text w-full text-xl p-2'>
             JacLy
         </div>
     );
