@@ -599,6 +599,24 @@ export const INITIAL_TOOLBOX_JSON = {
     },
     {
       kind: "category",
+      name: "Basic",
+      colour: 128,
+      contents: [
+        {
+          kind: "block",
+          blockxml:
+            '    <block type="sleep">\n' +
+            '      <value name="TIME">\n' +
+            '        <shadow type="math_number">\n' +
+            '          <field name="NUM">100</field>\n' +
+            "        </shadow>\n" +
+            "      </value>\n" +
+            "    </block>\n",
+        },
+      ],
+    },
+    {
+      kind: "category",
       name: "Smartled",
       colour: 259,
       contents: [

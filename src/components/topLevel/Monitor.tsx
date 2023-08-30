@@ -15,13 +15,14 @@ const Monitor: FC<HeaderProps> = ({ }) => {
     const appendText = (t: string) => setText(text + t);
 
     const max_lines = 12;
+
     useEffect(() => {
         if (!device) {
             return;
         }
 
         device.programOutput.onData((data) => {
-            let local_text = text + "\n" + data.toString();
+            let local_text = text + data.toString();
             let list_text = local_text.split("\n");
             list_text.pop();
 
@@ -32,7 +33,7 @@ const Monitor: FC<HeaderProps> = ({ }) => {
                 list_text.pop();
             }
 
-            setText(list_text.join("\n"));
+            setText(list_text.join("\n") + "\n");
         });
         device.programError.onData((data) => {
             let local_text = text + data.toString();
@@ -56,8 +57,8 @@ const Monitor: FC<HeaderProps> = ({ }) => {
                 <Label text={"Showing " + max_lines + " lines"}></Label>
             </div>
 
-            <div className="white_text flex w-full h-full overflow-y-scroll bg-gray-700 m-2 p-2 font-mono rounded">
-                <pre className="inline-block ">{text}</pre>
+            <div className="white_text flex w-full overflow-y-scroll bg-gray-700 m-2 p-2 font-mono rounded">
+                <pre className="inline-block">{text}</pre>
             </div>
         </div>
     );

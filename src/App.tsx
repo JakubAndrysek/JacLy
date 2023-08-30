@@ -19,11 +19,11 @@ function App() {
                         <div className='w-2/3 h-5/5'>
                             <BlocklyEditor/>
                         </div>
-                        <div className='w-1/3'>
+                        <div className='w-1/3 h-full'>
                             <div className='h-3/6'>
                                 <CodeResult/>
                             </div>
-                            <div className='h-7/8'>
+                            <div className=''>
                                 <Monitor/>
                             </div>
                             

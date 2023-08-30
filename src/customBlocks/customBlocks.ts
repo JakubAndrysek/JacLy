@@ -42,7 +42,7 @@ javascriptGenerator.forBlock['console'] = function(block: BlockSvg, generator: C
     return code;
 };
 
-
+// ========== INTERVAL ==========
 
 Blockly.Blocks['set_interval'] = {
     init: function() {
@@ -65,6 +65,30 @@ javascriptGenerator.forBlock['set_interval'] = function(block: BlockSvg, generat
     return code;
 }
 
+// ========== BASIC ==========
+
+Blockly.Blocks['sleep'] = {
+    init: function() {
+        this.appendValueInput("TIME")
+            .setCheck(null)
+            .appendField("await.sleep(ms)   ms =")
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(128);
+        this.setTooltip("dd");
+        this.setHelpUrl("");
+    }
+}
+
+javascriptGenerator.forBlock['sleep'] = function(block: BlockSvg, generator: CodeGenerator) {
+    var code = 'await.sleep(' + generator.valueToCode(block, 'ID', javascriptGenerator.ORDER_ATOMIC) +  ')\n'
+    
+    return code;
+}
+
+
+
+// ========== SMARTLEDS ==========
 
 Blockly.Blocks['smartled_init'] = {
     init: function() {
@@ -72,7 +96,7 @@ Blockly.Blocks['smartled_init'] = {
             .appendField("Init Smartled");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(0);
+        this.setColour(259);
         this.setTooltip("dd");
         this.setHelpUrl("");
     }
@@ -102,7 +126,7 @@ Blockly.Blocks['create_strip'] = {
             .appendField(new Blockly.FieldDropdown([["LED_WS2812","LED_WS2812"], ["LED_WS2812B","LED_WS2812B"], ["LED_WS2812B_2020","LED_WS2812B_2020"], ["LED_SK6812","LED_SK6812"], ["LED_WS2813","LED_WS2813"]]), "TYPE");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(0);
+        this.setColour(259);
         this.setTooltip("dd");
         this.setHelpUrl("");
     }
@@ -129,7 +153,7 @@ Blockly.Blocks['set_hex'] = {
             .appendField("             Hex =");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(0);
+        this.setColour(259);
         this.setTooltip("dd");
         this.setHelpUrl("");
     }
@@ -160,7 +184,7 @@ Blockly.Blocks['set_hsv'] = {
             .appendField("                  V =");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(0);
+        this.setColour(259);
         this.setTooltip("dd");
         this.setHelpUrl("");
     }
@@ -192,7 +216,7 @@ Blockly.Blocks['set_rgb'] = {
             .appendField("                 B =");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(0);
+        this.setColour(259);
         this.setTooltip("dd");
         this.setHelpUrl("");
     }
@@ -212,7 +236,7 @@ Blockly.Blocks['strip_show'] = {
             .appendField("  id =")
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(0);
+        this.setColour(259);
         this.setTooltip("dd");
         this.setHelpUrl("");
     }
