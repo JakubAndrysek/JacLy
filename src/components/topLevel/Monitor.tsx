@@ -57,7 +57,7 @@ const Monitor: FC<HeaderProps> = ({ }) => {
                 <Label text={"Showing " + max_lines + " lines"}></Label>
             </div>
 
-            <div className="white_text flex w-full overflow-y-scroll bg-gray-700 m-2 p-2 font-mono rounded">
+            <div className="h-4/6 white_text flex w-full overflow-y-scroll bg-gray-700 m-2 p-2 font-mono rounded">
                 <pre className="inline-block">{text}</pre>
             </div>
         </div>

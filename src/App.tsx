@@ -15,18 +15,17 @@ function App() {
                 <div className="flex flex-col h-full">
                     <Header/>
                     <ConnectionBar/>
-                    <div className='w-full h-5/6 flex flex-1'>
+                    <div className='m-0 p-0 w-full h-5/6 flex flex-1'>
                         <div className='w-2/3 h-5/5'>
                             <BlocklyEditor/>
                         </div>
-                        <div className='w-1/3 h-full'>
+                        <div className='w-1/3'>
                             <div className='h-3/6'>
                                 <CodeResult/>
                             </div>
-                            <div className=''>
+                            <div className='p-0 m-0 h-3/7'>
                                 <Monitor/>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
