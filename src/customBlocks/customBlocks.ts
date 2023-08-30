@@ -86,6 +86,45 @@ javascriptGenerator.forBlock['sleep'] = function(block: BlockSvg, generator: Cod
     return code;
 }
 
+Blockly.Blocks['async_func'] = {
+    init: function() {
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("async function")
+        this.appendStatementInput("CODE")
+            .setCheck(null)
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(120);
+        this.setTooltip("dd");
+        this.setHelpUrl("");
+    }
+}
+
+javascriptGenerator.forBlock['async_func'] = function(block: BlockSvg, generator: CodeGenerator) {
+    var code = 'async function ' + generator.valueToCode(block, 'NAME', javascriptGenerator.ORDER_ATOMIC).replaceAll("'", "") + '(){\n' + generator.statementToCode(block, 'CODE') + '};\n';
+    return code;
+}
+
+
+Blockly.Blocks['call_func'] = {
+    init: function() {
+        this.appendValueInput("NAME")
+            .setCheck(null)
+            .appendField("call function")
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(120);
+        this.setTooltip("dd");
+        this.setHelpUrl("");
+    }
+}
+
+javascriptGenerator.forBlock['call_func'] = function(block: BlockSvg, generator: CodeGenerator) {
+    var code = generator.valueToCode(block, 'NAME', javascriptGenerator.ORDER_ATOMIC).replaceAll("'", "") + '();\n';
+    return code;
+}
+
 
 
 // ========== SMARTLEDS ==========
@@ -134,7 +173,7 @@ Blockly.Blocks['create_strip'] = {
 
 javascriptGenerator.forBlock['create_strip'] = function(block: BlockSvg, generator: CodeGenerator) {
     var dropdown_type = block.getFieldValue('TYPE');
-    var code = "\nlet strip_"+ generator.valueToCode(block, 'ID', javascriptGenerator.ORDER_ATOMIC) +' = new SmartLed('+ generator.valueToCode(block, 'PIN', javascriptGenerator.ORDER_ATOMIC) +', '+ generator.valueToCode(block, 'COUNT', javascriptGenerator.ORDER_ATOMIC) +', '+ dropdown_type +')\n';
+    var code = "\nlet strip_"+ generator.valueToCode(block, 'ID', javascriptGenerator.ORDER_ATOMIC) +' = new SmartLed('+ generator.valueToCode(block, 'PIN', javascriptGenerator.ORDER_ATOMIC) +', '+ generator.valueToCode(block, 'COUNT', javascriptGenerator.ORDER_ATOMIC) +', '+ dropdown_type +');\n\n';
     return code;
 }
 
@@ -228,6 +267,25 @@ javascriptGenerator.forBlock['set_rgb'] = function(block: BlockSvg, generator: C
 }
 
 
+Blockly.Blocks['strip_clear'] = {
+    init: function() {
+        this.appendValueInput("ID")
+            .setCheck(null)
+            .appendField("clear")
+            .appendField("  id =")
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(259);
+        this.setTooltip("dd");
+        this.setHelpUrl("");
+    }
+}
+
+javascriptGenerator.forBlock['strip_clear'] = function(block: BlockSvg, generator: CodeGenerator) {
+    var code = 'strip_' + generator.valueToCode(block, 'ID', javascriptGenerator.ORDER_ATOMIC) +  '.clear();\n'
+    return code;
+}
+
 Blockly.Blocks['strip_show'] = {
     init: function() {
         this.appendValueInput("ID")
@@ -243,6 +301,6 @@ Blockly.Blocks['strip_show'] = {
 }
 
 javascriptGenerator.forBlock['strip_show'] = function(block: BlockSvg, generator: CodeGenerator) {
-    var code = 'strip_' + generator.valueToCode(block, 'ID', javascriptGenerator.ORDER_ATOMIC) +  '.show();'
+    var code = 'strip_' + generator.valueToCode(block, 'ID', javascriptGenerator.ORDER_ATOMIC) +  '.show();\n'
     return code;
 }

@@ -600,6 +600,7 @@ export const INITIAL_TOOLBOX_JSON = {
     {
       kind: "category",
       name: "Basic",
+      
       colour: 128,
       contents: [
         {
@@ -609,6 +610,28 @@ export const INITIAL_TOOLBOX_JSON = {
             '      <value name="TIME">\n' +
             '        <shadow type="math_number">\n' +
             '          <field name="NUM">100</field>\n' +
+            "        </shadow>\n" +
+            "      </value>\n" +
+            "    </block>\n",
+        },
+        {
+          kind: "block",
+          blockxml:
+            '    <block type="async_func">\n' +
+            '      <value name="NAME">\n' +
+            '        <shadow type="text">\n' +
+            '          <field name="TEXT">main</field>\n' +
+            "        </shadow>\n" +
+            "      </value>\n" +
+            "    </block>\n",
+        },
+        {
+          kind: "block",
+          blockxml:
+            '    <block type="call_func">\n' +
+            '      <value name="NAME">\n' +
+            '        <shadow type="text">\n' +
+            '          <field name="TEXT">main</field>\n' +
             "        </shadow>\n" +
             "      </value>\n" +
             "    </block>\n",
@@ -646,6 +669,28 @@ export const INITIAL_TOOLBOX_JSON = {
             "        </shadow>\n" +
             "      </value>\n" +
             '      <field name="TYPE">LED_WS2812</field>\n' +
+            "    </block>\n",
+        },
+        {
+          kind: "block",
+          blockxml:
+            '    <block type="strip_clear">\n' +
+            '      <value name="ID">\n' +
+            '        <shadow type="math_number">\n' +
+            '          <field name="ID">0</field>\n' +
+            "        </shadow>\n" +
+            "      </value>\n" +
+            "    </block>\n",
+        },
+        {
+          kind: "block",
+          blockxml:
+            '    <block type="strip_show">\n' +
+            '      <value name="ID">\n' +
+            '        <shadow type="math_number">\n' +
+            '          <field name="ID">0</field>\n' +
+            "        </shadow>\n" +
+            "      </value>\n" +
             "    </block>\n",
         },
         {
@@ -731,17 +776,7 @@ export const INITIAL_TOOLBOX_JSON = {
             "      </value>\n" +
             "    </block>\n",
         },
-        {
-          kind: "block",
-          blockxml:
-            '    <block type="strip_show">\n' +
-            '      <value name="ID">\n' +
-            '        <shadow type="math_number">\n' +
-            '          <field name="ID">0</field>\n' +
-            "        </shadow>\n" +
-            "      </value>\n" +
-            "    </block>\n",
-        },
+        
         
       ],
     },
