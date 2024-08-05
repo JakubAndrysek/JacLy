@@ -14,6 +14,6 @@ npm install
 ```
 3. Run
 ```
-npm dev
+npm run dev
 ```
 4. Open page in browser

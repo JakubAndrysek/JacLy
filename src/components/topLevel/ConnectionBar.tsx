@@ -7,7 +7,7 @@ export interface buttonProps extends InputHTMLAttributes<HTMLInputElement> {
 const ConnectionBar: FC<buttonProps> = ({}) => {
 
     return (
-        <div className={"w-full bg-gray-200 rounded p-2 mb-2"}>
+        <div className={"white_text w-full bg-gray-200 rounded p-2 mb-2"}>
             <ConnectionBtn/>
             <UploadBtn/>
         </div>
